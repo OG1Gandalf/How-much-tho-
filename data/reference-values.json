@@ -1,0 +1,867 @@
+{
+  "version": "1.1.0",
+  "last_updated": "2026-07-20",
+  "disclaimer": "Comparisons are illustrative estimates based on curated reference prices — not financial advice or precise market quotes. Many prices vary sharply by state, city, and facility; national averages are used.",
+  "constants": {
+    "football_pitch_m2": 7140,
+    "football_pitch_note": "FIFA standard pitch 105m × 68m ≈ 7,140 m²"
+  },
+  "categories": {
+    "bottled_water": {
+      "id": "bottled_water",
+      "label": "Bottled water",
+      "unit": "bottle",
+      "unit_plural": "bottles of water",
+      "short_label": "Water bottles",
+      "tagline": "Everyday hydration, made tangible",
+      "accent": "#2A7A9B",
+      "accent_soft": "#D6EEF6",
+      "global_default": {
+        "value": 1.5,
+        "currency": "USD",
+        "unit_label": "per ~500ml bottle",
+        "source": "Approximate retail price (global midpoint estimate)",
+        "last_updated": "2026-07-20",
+        "notes": "Fallback when country-specific data is unavailable"
+      },
+      "regions": {
+        "US": {
+          "value": 1.5,
+          "currency": "USD",
+          "unit_label": "per ~500ml bottle",
+          "source": "Approximate US retail price",
+          "last_updated": "2026-07-20"
+        },
+        "IN": {
+          "value": 20,
+          "currency": "INR",
+          "unit_label": "per ~1L bottle",
+          "source": "Approximate India retail price",
+          "last_updated": "2026-07-20"
+        },
+        "GB": {
+          "value": 1.0,
+          "currency": "GBP",
+          "unit_label": "per ~500ml bottle",
+          "source": "Approximate UK retail price",
+          "last_updated": "2026-07-20"
+        },
+        "DE": {
+          "value": 1.0,
+          "currency": "EUR",
+          "unit_label": "per ~500ml–1L bottle",
+          "source": "Approximate EU retail price",
+          "last_updated": "2026-07-20"
+        },
+        "FR": {
+          "value": 1.0,
+          "currency": "EUR",
+          "unit_label": "per ~500ml–1L bottle",
+          "source": "Approximate EU retail price",
+          "last_updated": "2026-07-20"
+        },
+        "JP": {
+          "value": 120,
+          "currency": "JPY",
+          "unit_label": "per ~500ml bottle",
+          "source": "Approximate Japan convenience-store price",
+          "last_updated": "2026-07-20"
+        },
+        "BR": {
+          "value": 3.5,
+          "currency": "BRL",
+          "unit_label": "per ~500ml bottle",
+          "source": "Approximate Brazil retail price",
+          "last_updated": "2026-07-20"
+        },
+        "MX": {
+          "value": 15,
+          "currency": "MXN",
+          "unit_label": "per ~600ml bottle",
+          "source": "Approximate Mexico retail price",
+          "last_updated": "2026-07-20"
+        },
+        "AU": {
+          "value": 2.5,
+          "currency": "AUD",
+          "unit_label": "per ~600ml bottle",
+          "source": "Approximate Australia retail price",
+          "last_updated": "2026-07-20"
+        },
+        "NG": {
+          "value": 200,
+          "currency": "NGN",
+          "unit_label": "per ~60–75cl bottle",
+          "source": "Approximate Nigeria retail price",
+          "last_updated": "2026-07-20"
+        },
+        "CN": {
+          "value": 2,
+          "currency": "CNY",
+          "unit_label": "per ~550ml bottle",
+          "source": "Approximate China retail price",
+          "last_updated": "2026-07-20"
+        }
+      }
+    },
+    "trees": {
+      "id": "trees",
+      "label": "Trees planted",
+      "unit": "tree",
+      "unit_plural": "trees planted",
+      "short_label": "Trees",
+      "tagline": "Reforestation at NGO benchmark rates",
+      "accent": "#2D6A4F",
+      "accent_soft": "#D8F0E4",
+      "global_default": {
+        "value": 1.0,
+        "currency": "USD",
+        "unit_label": "per tree planted",
+        "source": "NGO reforestation benchmarks (~$1/tree; e.g. Arbor Day Foundation / #TeamTrees / Plant With Purpose public figures)",
+        "last_updated": "2026-07-20",
+        "notes": "Widely cited NGO program cost; actual costs vary by geography and species"
+      },
+      "regions": {}
+    },
+    "football_pitch": {
+      "id": "football_pitch",
+      "label": "Football pitches",
+      "unit": "pitch",
+      "unit_plural": "football pitches of land",
+      "short_label": "Land area",
+      "tagline": "Land area vs a FIFA standard pitch",
+      "accent": "#5B8C3E",
+      "accent_soft": "#E4F2D8",
+      "meta": {
+        "area_m2": 7140,
+        "area_note": "FIFA standard pitch 105m × 68m"
+      },
+      "global_default": {
+        "value": 25,
+        "currency": "USD",
+        "unit_label": "per m² of land (rural/agricultural midpoint)",
+        "source": "Approximate global rural land price midpoint — highly variable",
+        "last_updated": "2026-07-20",
+        "notes": "Land prices vary enormously by location and use; treated as illustrative rural averages"
+      },
+      "regions": {
+        "US": {
+          "value": 8,
+          "currency": "USD",
+          "unit_label": "per m² (approx. US farmland average)",
+          "source": "Approximate US agricultural land value (curated estimate)",
+          "last_updated": "2026-07-20"
+        },
+        "IN": {
+          "value": 50,
+          "currency": "INR",
+          "unit_label": "per m² (approx. rural land)",
+          "source": "Approximate India rural land price (curated estimate)",
+          "last_updated": "2026-07-20"
+        },
+        "GB": {
+          "value": 25,
+          "currency": "GBP",
+          "unit_label": "per m² (approx. agricultural land)",
+          "source": "Approximate UK agricultural land price (curated estimate)",
+          "last_updated": "2026-07-20"
+        },
+        "DE": {
+          "value": 30,
+          "currency": "EUR",
+          "unit_label": "per m² (approx. agricultural land)",
+          "source": "Approximate Germany agricultural land price (curated estimate)",
+          "last_updated": "2026-07-20"
+        },
+        "FR": {
+          "value": 8,
+          "currency": "EUR",
+          "unit_label": "per m² (approx. agricultural land)",
+          "source": "Approximate France agricultural land price (curated estimate)",
+          "last_updated": "2026-07-20"
+        },
+        "JP": {
+          "value": 1500,
+          "currency": "JPY",
+          "unit_label": "per m² (approx. rural land)",
+          "source": "Approximate Japan rural land price (curated estimate)",
+          "last_updated": "2026-07-20"
+        },
+        "BR": {
+          "value": 15,
+          "currency": "BRL",
+          "unit_label": "per m² (approx. agricultural land)",
+          "source": "Approximate Brazil agricultural land price (curated estimate)",
+          "last_updated": "2026-07-20"
+        },
+        "MX": {
+          "value": 80,
+          "currency": "MXN",
+          "unit_label": "per m² (approx. rural land)",
+          "source": "Approximate Mexico rural land price (curated estimate)",
+          "last_updated": "2026-07-20"
+        },
+        "AU": {
+          "value": 5,
+          "currency": "AUD",
+          "unit_label": "per m² (approx. pastoral/agricultural land)",
+          "source": "Approximate Australia agricultural land price (curated estimate)",
+          "last_updated": "2026-07-20"
+        },
+        "NG": {
+          "value": 5000,
+          "currency": "NGN",
+          "unit_label": "per m² (approx. peri-urban/rural midpoint)",
+          "source": "Approximate Nigeria land price (curated estimate; highly variable)",
+          "last_updated": "2026-07-20"
+        },
+        "CN": {
+          "value": 50,
+          "currency": "CNY",
+          "unit_label": "per m² (approx. rural land)",
+          "source": "Approximate China rural land price (curated estimate)",
+          "last_updated": "2026-07-20"
+        }
+      }
+    },
+    "school": {
+      "id": "school",
+      "label": "Rural schools",
+      "unit": "school",
+      "unit_plural": "rural community schools",
+      "short_label": "Schools",
+      "tagline": "Community school construction cost",
+      "accent": "#B86B2E",
+      "accent_soft": "#F7E6D4",
+      "global_default": {
+        "value": 49000,
+        "currency": "USD",
+        "unit_label": "per rural/community school",
+        "source": "buildOn 2025 program figures — $980,000 funded 20 schools (Burkina Faso, Guatemala, Haiti, Malawi, Senegal) ≈ $49,000/school",
+        "last_updated": "2026-07-20",
+        "notes": "NGO program cost for basic community schools; not equivalent to full public-school construction in high-income countries"
+      },
+      "regions": {
+        "US": {
+          "value": 49000,
+          "currency": "USD",
+          "unit_label": "per rural/community school (NGO benchmark)",
+          "source": "buildOn global program average used as illustrative default",
+          "last_updated": "2026-07-20",
+          "notes": "US public-school construction costs are far higher; this uses the NGO community-school benchmark for consistency"
+        },
+        "IN": {
+          "value": 35000,
+          "currency": "USD",
+          "unit_label": "per basic community school (regional estimate)",
+          "source": "Scaled estimate from NGO community-school benchmarks for South Asia",
+          "last_updated": "2026-07-20"
+        },
+        "NG": {
+          "value": 45000,
+          "currency": "USD",
+          "unit_label": "per rural community school (regional estimate)",
+          "source": "Near buildOn West Africa program average",
+          "last_updated": "2026-07-20"
+        },
+        "BR": {
+          "value": 55000,
+          "currency": "USD",
+          "unit_label": "per rural community school (regional estimate)",
+          "source": "Scaled estimate from NGO community-school benchmarks for Latin America",
+          "last_updated": "2026-07-20"
+        },
+        "MX": {
+          "value": 52000,
+          "currency": "USD",
+          "unit_label": "per rural community school (regional estimate)",
+          "source": "Scaled estimate from NGO community-school benchmarks for Latin America",
+          "last_updated": "2026-07-20"
+        }
+      }
+    },
+    "hospital": {
+      "id": "hospital",
+      "label": "Hospital bed-days",
+      "unit": "bed-day",
+      "unit_plural": "hospital bed-days",
+      "short_label": "Hospitals",
+      "tagline": "One overnight inpatient bed-day",
+      "accent": "#5B8DEF",
+      "accent_soft": "#1A2744",
+      "global_default": {
+        "value": 400,
+        "currency": "USD",
+        "unit_label": "per hospital bed-day (national average)",
+        "source": "Approximate blended public/private inpatient bed-day cost — varies widely by city and facility",
+        "last_updated": "2026-07-20",
+        "notes": "State-to-state and urban/rural prices differ sharply; treated as a national midpoint estimate"
+      },
+      "regions": {
+        "US": {
+          "value": 3200,
+          "currency": "USD",
+          "unit_label": "per hospital bed-day (US average)",
+          "source": "Approximate US inpatient bed-day midpoint (varies enormously by state & hospital)",
+          "last_updated": "2026-07-20"
+        },
+        "IN": {
+          "value": 8000,
+          "currency": "INR",
+          "unit_label": "per hospital bed-day (India average)",
+          "source": "Approximate India private/semi-private bed-day midpoint across major cities",
+          "last_updated": "2026-07-20"
+        },
+        "GB": {
+          "value": 700,
+          "currency": "GBP",
+          "unit_label": "per hospital bed-day (UK average)",
+          "source": "Approximate UK inpatient bed-day midpoint estimate",
+          "last_updated": "2026-07-20"
+        },
+        "DE": {
+          "value": 550,
+          "currency": "EUR",
+          "unit_label": "per hospital bed-day (Germany average)",
+          "source": "Approximate Germany inpatient bed-day midpoint estimate",
+          "last_updated": "2026-07-20"
+        },
+        "FR": {
+          "value": 500,
+          "currency": "EUR",
+          "unit_label": "per hospital bed-day (France average)",
+          "source": "Approximate France inpatient bed-day midpoint estimate",
+          "last_updated": "2026-07-20"
+        },
+        "JP": {
+          "value": 45000,
+          "currency": "JPY",
+          "unit_label": "per hospital bed-day (Japan average)",
+          "source": "Approximate Japan inpatient bed-day midpoint estimate",
+          "last_updated": "2026-07-20"
+        },
+        "BR": {
+          "value": 800,
+          "currency": "BRL",
+          "unit_label": "per hospital bed-day (Brazil average)",
+          "source": "Approximate Brazil private bed-day midpoint estimate",
+          "last_updated": "2026-07-20"
+        },
+        "MX": {
+          "value": 4500,
+          "currency": "MXN",
+          "unit_label": "per hospital bed-day (Mexico average)",
+          "source": "Approximate Mexico private bed-day midpoint estimate",
+          "last_updated": "2026-07-20"
+        },
+        "AU": {
+          "value": 1800,
+          "currency": "AUD",
+          "unit_label": "per hospital bed-day (Australia average)",
+          "source": "Approximate Australia inpatient bed-day midpoint estimate",
+          "last_updated": "2026-07-20"
+        },
+        "NG": {
+          "value": 45000,
+          "currency": "NGN",
+          "unit_label": "per hospital bed-day (Nigeria average)",
+          "source": "Approximate Nigeria private bed-day midpoint (highly variable by city)",
+          "last_updated": "2026-07-20"
+        },
+        "CN": {
+          "value": 1200,
+          "currency": "CNY",
+          "unit_label": "per hospital bed-day (China average)",
+          "source": "Approximate China inpatient bed-day midpoint estimate",
+          "last_updated": "2026-07-20"
+        }
+      }
+    },
+    "cancer_surgery": {
+      "id": "cancer_surgery",
+      "label": "Cancer surgeries",
+      "unit": "surgery",
+      "unit_plural": "cancer surgeries",
+      "short_label": "Cancer surgery",
+      "tagline": "Major cancer surgery package cost",
+      "accent": "#E85D75",
+      "accent_soft": "#3A1520",
+      "global_default": {
+        "value": 15000,
+        "currency": "USD",
+        "unit_label": "per major cancer surgery (national average package)",
+        "source": "Approximate mid-range cancer surgery package — type, stage, and facility change costs dramatically",
+        "last_updated": "2026-07-20",
+        "notes": "Illustrative only; not a quote for any specific procedure. Prices vary by state, hospital, and insurance"
+      },
+      "regions": {
+        "US": {
+          "value": 45000,
+          "currency": "USD",
+          "unit_label": "per major cancer surgery (US average package)",
+          "source": "Approximate US mid-range cancer surgery package (varies widely by state & insurer)",
+          "last_updated": "2026-07-20"
+        },
+        "IN": {
+          "value": 250000,
+          "currency": "INR",
+          "unit_label": "per major cancer surgery (India average package)",
+          "source": "Approximate India private-hospital cancer surgery package midpoint across metros",
+          "last_updated": "2026-07-20"
+        },
+        "GB": {
+          "value": 18000,
+          "currency": "GBP",
+          "unit_label": "per major cancer surgery (UK private average)",
+          "source": "Approximate UK private cancer surgery package midpoint",
+          "last_updated": "2026-07-20"
+        },
+        "DE": {
+          "value": 20000,
+          "currency": "EUR",
+          "unit_label": "per major cancer surgery (Germany average)",
+          "source": "Approximate Germany cancer surgery package midpoint",
+          "last_updated": "2026-07-20"
+        },
+        "FR": {
+          "value": 18000,
+          "currency": "EUR",
+          "unit_label": "per major cancer surgery (France average)",
+          "source": "Approximate France cancer surgery package midpoint",
+          "last_updated": "2026-07-20"
+        },
+        "JP": {
+          "value": 2500000,
+          "currency": "JPY",
+          "unit_label": "per major cancer surgery (Japan average)",
+          "source": "Approximate Japan cancer surgery package midpoint",
+          "last_updated": "2026-07-20"
+        },
+        "BR": {
+          "value": 45000,
+          "currency": "BRL",
+          "unit_label": "per major cancer surgery (Brazil average)",
+          "source": "Approximate Brazil private cancer surgery package midpoint",
+          "last_updated": "2026-07-20"
+        },
+        "MX": {
+          "value": 280000,
+          "currency": "MXN",
+          "unit_label": "per major cancer surgery (Mexico average)",
+          "source": "Approximate Mexico private cancer surgery package midpoint",
+          "last_updated": "2026-07-20"
+        },
+        "AU": {
+          "value": 35000,
+          "currency": "AUD",
+          "unit_label": "per major cancer surgery (Australia average)",
+          "source": "Approximate Australia cancer surgery package midpoint",
+          "last_updated": "2026-07-20"
+        },
+        "NG": {
+          "value": 3500000,
+          "currency": "NGN",
+          "unit_label": "per major cancer surgery (Nigeria average)",
+          "source": "Approximate Nigeria private cancer surgery package midpoint (highly variable)",
+          "last_updated": "2026-07-20"
+        },
+        "CN": {
+          "value": 80000,
+          "currency": "CNY",
+          "unit_label": "per major cancer surgery (China average)",
+          "source": "Approximate China cancer surgery package midpoint",
+          "last_updated": "2026-07-20"
+        }
+      }
+    },
+    "syringe": {
+      "id": "syringe",
+      "label": "Syringe injections",
+      "unit": "syringe",
+      "unit_plural": "syringe injections",
+      "short_label": "Syringes",
+      "tagline": "Sterile disposable syringe unit cost",
+      "accent": "#4ECDC4",
+      "accent_soft": "#143532",
+      "global_default": {
+        "value": 0.25,
+        "currency": "USD",
+        "unit_label": "per sterile disposable syringe",
+        "source": "Approximate retail/clinic disposable syringe price (national average)",
+        "last_updated": "2026-07-20",
+        "notes": "Excludes medication cost; syringe hardware only. Prices vary by brand and volume"
+      },
+      "regions": {
+        "US": {
+          "value": 0.4,
+          "currency": "USD",
+          "unit_label": "per sterile disposable syringe",
+          "source": "Approximate US retail/clinic syringe unit price",
+          "last_updated": "2026-07-20"
+        },
+        "IN": {
+          "value": 5,
+          "currency": "INR",
+          "unit_label": "per sterile disposable syringe",
+          "source": "Approximate India pharmacy/clinic syringe unit price (national average)",
+          "last_updated": "2026-07-20"
+        },
+        "GB": {
+          "value": 0.25,
+          "currency": "GBP",
+          "unit_label": "per sterile disposable syringe",
+          "source": "Approximate UK clinic supply syringe unit price",
+          "last_updated": "2026-07-20"
+        },
+        "DE": {
+          "value": 0.3,
+          "currency": "EUR",
+          "unit_label": "per sterile disposable syringe",
+          "source": "Approximate Germany clinic supply syringe unit price",
+          "last_updated": "2026-07-20"
+        },
+        "FR": {
+          "value": 0.3,
+          "currency": "EUR",
+          "unit_label": "per sterile disposable syringe",
+          "source": "Approximate France clinic supply syringe unit price",
+          "last_updated": "2026-07-20"
+        },
+        "JP": {
+          "value": 40,
+          "currency": "JPY",
+          "unit_label": "per sterile disposable syringe",
+          "source": "Approximate Japan clinic supply syringe unit price",
+          "last_updated": "2026-07-20"
+        },
+        "BR": {
+          "value": 1.5,
+          "currency": "BRL",
+          "unit_label": "per sterile disposable syringe",
+          "source": "Approximate Brazil pharmacy/clinic syringe unit price",
+          "last_updated": "2026-07-20"
+        },
+        "MX": {
+          "value": 8,
+          "currency": "MXN",
+          "unit_label": "per sterile disposable syringe",
+          "source": "Approximate Mexico pharmacy/clinic syringe unit price",
+          "last_updated": "2026-07-20"
+        },
+        "AU": {
+          "value": 0.5,
+          "currency": "AUD",
+          "unit_label": "per sterile disposable syringe",
+          "source": "Approximate Australia clinic supply syringe unit price",
+          "last_updated": "2026-07-20"
+        },
+        "NG": {
+          "value": 150,
+          "currency": "NGN",
+          "unit_label": "per sterile disposable syringe",
+          "source": "Approximate Nigeria pharmacy/clinic syringe unit price",
+          "last_updated": "2026-07-20"
+        },
+        "CN": {
+          "value": 1.5,
+          "currency": "CNY",
+          "unit_label": "per sterile disposable syringe",
+          "source": "Approximate China clinic supply syringe unit price",
+          "last_updated": "2026-07-20"
+        }
+      }
+    },
+    "first_aid_kit": {
+      "id": "first_aid_kit",
+      "label": "First aid kits",
+      "unit": "kit",
+      "unit_plural": "first aid kits",
+      "short_label": "First aid",
+      "tagline": "Standard household first aid kit",
+      "accent": "#F0A500",
+      "accent_soft": "#3A2A0A",
+      "global_default": {
+        "value": 15,
+        "currency": "USD",
+        "unit_label": "per standard first aid kit",
+        "source": "Approximate retail price for a basic household first aid kit (national average)",
+        "last_updated": "2026-07-20",
+        "notes": "Kit contents and brands vary; state/city retail prices differ"
+      },
+      "regions": {
+        "US": {
+          "value": 22,
+          "currency": "USD",
+          "unit_label": "per standard first aid kit",
+          "source": "Approximate US retail first aid kit midpoint",
+          "last_updated": "2026-07-20"
+        },
+        "IN": {
+          "value": 350,
+          "currency": "INR",
+          "unit_label": "per standard first aid kit",
+          "source": "Approximate India retail first aid kit midpoint across cities",
+          "last_updated": "2026-07-20"
+        },
+        "GB": {
+          "value": 12,
+          "currency": "GBP",
+          "unit_label": "per standard first aid kit",
+          "source": "Approximate UK retail first aid kit midpoint",
+          "last_updated": "2026-07-20"
+        },
+        "DE": {
+          "value": 15,
+          "currency": "EUR",
+          "unit_label": "per standard first aid kit",
+          "source": "Approximate Germany retail first aid kit midpoint",
+          "last_updated": "2026-07-20"
+        },
+        "FR": {
+          "value": 14,
+          "currency": "EUR",
+          "unit_label": "per standard first aid kit",
+          "source": "Approximate France retail first aid kit midpoint",
+          "last_updated": "2026-07-20"
+        },
+        "JP": {
+          "value": 2500,
+          "currency": "JPY",
+          "unit_label": "per standard first aid kit",
+          "source": "Approximate Japan retail first aid kit midpoint",
+          "last_updated": "2026-07-20"
+        },
+        "BR": {
+          "value": 60,
+          "currency": "BRL",
+          "unit_label": "per standard first aid kit",
+          "source": "Approximate Brazil retail first aid kit midpoint",
+          "last_updated": "2026-07-20"
+        },
+        "MX": {
+          "value": 280,
+          "currency": "MXN",
+          "unit_label": "per standard first aid kit",
+          "source": "Approximate Mexico retail first aid kit midpoint",
+          "last_updated": "2026-07-20"
+        },
+        "AU": {
+          "value": 25,
+          "currency": "AUD",
+          "unit_label": "per standard first aid kit",
+          "source": "Approximate Australia retail first aid kit midpoint",
+          "last_updated": "2026-07-20"
+        },
+        "NG": {
+          "value": 8000,
+          "currency": "NGN",
+          "unit_label": "per standard first aid kit",
+          "source": "Approximate Nigeria retail first aid kit midpoint",
+          "last_updated": "2026-07-20"
+        },
+        "CN": {
+          "value": 80,
+          "currency": "CNY",
+          "unit_label": "per standard first aid kit",
+          "source": "Approximate China retail first aid kit midpoint",
+          "last_updated": "2026-07-20"
+        }
+      }
+    },
+    "ambulance": {
+      "id": "ambulance",
+      "label": "Ambulance trips",
+      "unit": "trip",
+      "unit_plural": "ambulance trips",
+      "short_label": "Ambulances",
+      "tagline": "One emergency ambulance response",
+      "accent": "#FF6B35",
+      "accent_soft": "#3A1A0E",
+      "global_default": {
+        "value": 200,
+        "currency": "USD",
+        "unit_label": "per emergency ambulance trip (national average)",
+        "source": "Approximate emergency ambulance transport fee — distance, private vs public, and city change costs",
+        "last_updated": "2026-07-20",
+        "notes": "Highly variable by state/city and whether service is public, insurance-covered, or private"
+      },
+      "regions": {
+        "US": {
+          "value": 1200,
+          "currency": "USD",
+          "unit_label": "per emergency ambulance trip (US average)",
+          "source": "Approximate US emergency ambulance bill midpoint (varies sharply by state)",
+          "last_updated": "2026-07-20"
+        },
+        "IN": {
+          "value": 2500,
+          "currency": "INR",
+          "unit_label": "per emergency ambulance trip (India average)",
+          "source": "Approximate India private ambulance trip midpoint across cities",
+          "last_updated": "2026-07-20"
+        },
+        "GB": {
+          "value": 250,
+          "currency": "GBP",
+          "unit_label": "per private ambulance transfer (UK average)",
+          "source": "Approximate UK private ambulance transfer midpoint (NHS emergency is often free at point of use)",
+          "last_updated": "2026-07-20",
+          "notes": "NHS 999 ambulance is typically free for residents; this uses a private transfer average for illustration"
+        },
+        "DE": {
+          "value": 500,
+          "currency": "EUR",
+          "unit_label": "per emergency ambulance trip (Germany average)",
+          "source": "Approximate Germany emergency transport patient share / private midpoint",
+          "last_updated": "2026-07-20"
+        },
+        "FR": {
+          "value": 180,
+          "currency": "EUR",
+          "unit_label": "per emergency ambulance trip (France average)",
+          "source": "Approximate France ambulance patient contribution midpoint",
+          "last_updated": "2026-07-20"
+        },
+        "JP": {
+          "value": 7500,
+          "currency": "JPY",
+          "unit_label": "per emergency ambulance trip (Japan average)",
+          "source": "Approximate Japan emergency transport related cost midpoint (often low/free publicly)",
+          "last_updated": "2026-07-20"
+        },
+        "BR": {
+          "value": 400,
+          "currency": "BRL",
+          "unit_label": "per emergency ambulance trip (Brazil average)",
+          "source": "Approximate Brazil private ambulance trip midpoint",
+          "last_updated": "2026-07-20"
+        },
+        "MX": {
+          "value": 2500,
+          "currency": "MXN",
+          "unit_label": "per emergency ambulance trip (Mexico average)",
+          "source": "Approximate Mexico private ambulance trip midpoint",
+          "last_updated": "2026-07-20"
+        },
+        "AU": {
+          "value": 900,
+          "currency": "AUD",
+          "unit_label": "per emergency ambulance trip (Australia average)",
+          "source": "Approximate Australia ambulance callout midpoint (varies by state cover)",
+          "last_updated": "2026-07-20"
+        },
+        "NG": {
+          "value": 35000,
+          "currency": "NGN",
+          "unit_label": "per emergency ambulance trip (Nigeria average)",
+          "source": "Approximate Nigeria private ambulance trip midpoint",
+          "last_updated": "2026-07-20"
+        },
+        "CN": {
+          "value": 200,
+          "currency": "CNY",
+          "unit_label": "per emergency ambulance trip (China average)",
+          "source": "Approximate China ambulance trip midpoint",
+          "last_updated": "2026-07-20"
+        }
+      }
+    },
+    "biryani": {
+      "id": "biryani",
+      "label": "Biryani plates",
+      "unit": "plate",
+      "unit_plural": "plates of biryani",
+      "short_label": "Biryani",
+      "tagline": "One restaurant plate of biryani (or local equivalent)",
+      "accent": "#D4A017",
+      "accent_soft": "#3A2E0A",
+      "global_default": {
+        "value": 8,
+        "currency": "USD",
+        "unit_label": "per plate of biryani (or local rice platter equivalent)",
+        "source": "Approximate mid-range restaurant plate — city and venue change prices a lot",
+        "last_updated": "2026-07-20",
+        "notes": "Where biryani is uncommon, treated as a comparable mid-range rice/meat platter. State/city averages used"
+      },
+      "regions": {
+        "US": {
+          "value": 16,
+          "currency": "USD",
+          "unit_label": "per plate of biryani (US restaurant average)",
+          "source": "Approximate US Indian restaurant biryani plate midpoint",
+          "last_updated": "2026-07-20"
+        },
+        "IN": {
+          "value": 280,
+          "currency": "INR",
+          "unit_label": "per plate of biryani (India average)",
+          "source": "Approximate India restaurant biryani midpoint across cities (Hyderabad/Lucknow/Delhi blend)",
+          "last_updated": "2026-07-20"
+        },
+        "GB": {
+          "value": 12,
+          "currency": "GBP",
+          "unit_label": "per plate of biryani (UK restaurant average)",
+          "source": "Approximate UK restaurant biryani plate midpoint",
+          "last_updated": "2026-07-20"
+        },
+        "DE": {
+          "value": 13,
+          "currency": "EUR",
+          "unit_label": "per plate of biryani (Germany restaurant average)",
+          "source": "Approximate Germany restaurant biryani plate midpoint",
+          "last_updated": "2026-07-20"
+        },
+        "FR": {
+          "value": 14,
+          "currency": "EUR",
+          "unit_label": "per plate of biryani (France restaurant average)",
+          "source": "Approximate France restaurant biryani plate midpoint",
+          "last_updated": "2026-07-20"
+        },
+        "JP": {
+          "value": 1600,
+          "currency": "JPY",
+          "unit_label": "per plate of biryani (Japan restaurant average)",
+          "source": "Approximate Japan restaurant biryani / rice platter midpoint",
+          "last_updated": "2026-07-20"
+        },
+        "BR": {
+          "value": 45,
+          "currency": "BRL",
+          "unit_label": "per plate of biryani (Brazil restaurant average)",
+          "source": "Approximate Brazil restaurant biryani / rice platter midpoint",
+          "last_updated": "2026-07-20"
+        },
+        "MX": {
+          "value": 220,
+          "currency": "MXN",
+          "unit_label": "per plate of biryani (Mexico restaurant average)",
+          "source": "Approximate Mexico restaurant biryani / rice platter midpoint",
+          "last_updated": "2026-07-20"
+        },
+        "AU": {
+          "value": 22,
+          "currency": "AUD",
+          "unit_label": "per plate of biryani (Australia restaurant average)",
+          "source": "Approximate Australia restaurant biryani plate midpoint",
+          "last_updated": "2026-07-20"
+        },
+        "NG": {
+          "value": 4500,
+          "currency": "NGN",
+          "unit_label": "per plate of biryani (Nigeria restaurant average)",
+          "source": "Approximate Nigeria restaurant jollof/biryani-style platter midpoint",
+          "last_updated": "2026-07-20"
+        },
+        "CN": {
+          "value": 55,
+          "currency": "CNY",
+          "unit_label": "per plate of biryani (China restaurant average)",
+          "source": "Approximate China restaurant biryani / rice platter midpoint",
+          "last_updated": "2026-07-20"
+        }
+      }
+    }
+  }
+}
