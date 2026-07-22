@@ -1,7 +1,10 @@
 import { AnimatePresence, motion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 import type { CategoryId, ComparisonResult } from '../types/reference'
 import { CATEGORY_ORDER } from '../lib/comparisons'
 import referenceData from '../../data/reference-values.json'
+import { categoryCrossfade, categoryDirection } from '../lib/motion'
+import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion'
 import { ComparisonCard } from './ComparisonCard'
 
 interface CategoryTabsProps {
@@ -45,24 +48,41 @@ interface ResultsGridProps {
 }
 
 export function ResultsGrid({ results, filter }: ResultsGridProps) {
+  const reduced = usePrefersReducedMotion()
+  const prevFilter = useRef(filter)
+  const [direction, setDirection] = useState<1 | -1>(1)
+
+  useEffect(() => {
+    if (prevFilter.current !== filter) {
+      setDirection(categoryDirection(prevFilter.current, filter))
+      prevFilter.current = filter
+    }
+  }, [filter])
+
   const visible =
     filter === 'all' ? results : results.filter((r) => r.categoryId === filter)
 
+  const crossfade = categoryCrossfade(direction, reduced)
+
   return (
-    <div className="results-grid">
-      <AnimatePresence mode="popLayout">
-        {visible.map((result, i) => (
-          <motion.div
-            key={result.categoryId}
-            layout
-            initial={{ opacity: 0, scale: 0.97 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.97 }}
-            transition={{ duration: 0.28 }}
-          >
-            <ComparisonCard result={result} index={i} />
-          </motion.div>
-        ))}
+    <div className="results-grid-shell">
+      <AnimatePresence mode="sync" initial={false}>
+        <motion.div
+          key={filter}
+          className="results-grid"
+          variants={crossfade}
+          initial="enter"
+          animate="center"
+          exit="exit"
+        >
+          {visible.map((result, i) => (
+            <ComparisonCard
+              key={`${filter}-${result.categoryId}`}
+              result={result}
+              index={i}
+            />
+          ))}
+        </motion.div>
       </AnimatePresence>
     </div>
   )

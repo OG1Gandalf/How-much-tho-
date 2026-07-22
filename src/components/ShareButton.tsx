@@ -1,6 +1,8 @@
+import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
 import type { ComparisonResult } from '../types/reference'
 import { shareResult } from '../lib/share'
+import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion'
 
 interface ShareButtonProps {
   amount: number
@@ -15,12 +17,18 @@ export function ShareButton({
   countryName,
   comparisons,
 }: ShareButtonProps) {
+  const reduced = usePrefersReducedMotion()
   const [status, setStatus] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
+  const [flash, setFlash] = useState(false)
 
   async function handleShare() {
     setBusy(true)
     setStatus(null)
+    if (!reduced) {
+      setFlash(true)
+      window.setTimeout(() => setFlash(false), 320)
+    }
     try {
       const result = await shareResult({
         amount,
@@ -47,6 +55,18 @@ export function ShareButton({
 
   return (
     <div className="share-wrap">
+      <AnimatePresence>
+        {flash && (
+          <motion.div
+            className="capture-flash"
+            aria-hidden
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 0.55, 0] }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.32, ease: 'easeOut', times: [0, 0.18, 1] }}
+          />
+        )}
+      </AnimatePresence>
       <button
         type="button"
         className="btn btn-primary"

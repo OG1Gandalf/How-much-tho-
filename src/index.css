@@ -596,6 +596,16 @@ a {
   font-weight: 600;
 }
 
+.results-grid-shell {
+  position: relative;
+  min-height: 12rem;
+  display: grid;
+}
+
+.results-grid-shell > .results-grid {
+  grid-area: 1 / 1;
+}
+
 .results-grid {
   display: grid;
   gap: 1rem;
@@ -608,6 +618,7 @@ a {
 }
 
 .comparison-card {
+  position: relative;
   height: 100%;
   padding: 1.25rem 1.25rem 1.1rem;
   border-radius: 1.25rem;
@@ -618,6 +629,16 @@ a {
   );
   border: 1px solid color-mix(in srgb, var(--card-accent) 28%, transparent);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  will-change: transform;
+  transform: translateZ(0);
+  cursor: default;
+}
+
+.comparison-card.is-milestone {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--card-accent) 55%, transparent),
+    0 0 28px color-mix(in srgb, var(--card-accent) 35%, transparent),
+    0 16px 40px rgba(0, 0, 0, 0.35);
 }
 
 .comparison-card-top {
@@ -704,6 +725,22 @@ a {
   font-variant-numeric: tabular-nums;
 }
 
+.comparison-number.is-pulse {
+  animation: number-pulse 0.7s ease-out;
+}
+
+@keyframes number-pulse {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .comparison-unit {
   margin: 0.4rem 0 0;
   font-size: 1.02rem;
@@ -725,24 +762,13 @@ a {
   height: 1.55rem;
   display: grid;
   place-items: center;
-  opacity: 0;
-  animation: icon-pop 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+  transform: translateZ(0);
 }
 
 .icon-grid-item svg {
   width: 100%;
   height: 100%;
-}
-
-@keyframes icon-pop {
-  from {
-    opacity: 0;
-    transform: translateY(4px) scale(0.85);
-  }
-  to {
-    opacity: 0.85;
-    transform: none;
-  }
 }
 
 .icon-grid-more {
@@ -752,6 +778,43 @@ a {
   margin-left: 0.15rem;
 }
 
+.milestone-burst {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  z-index: 1;
+}
+
+.milestone-spark {
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--card-accent) 80%, white);
+  opacity: 0;
+  animation: spark-burst 0.75s ease-out forwards;
+  animation-delay: calc(var(--i) * 28ms);
+  transform: rotate(calc(var(--i) * 45deg)) translateY(0);
+}
+
+@keyframes spark-burst {
+  0% {
+    opacity: 0;
+    transform: rotate(calc(var(--i) * 45deg)) translateY(0) scale(0.4);
+  }
+  25% {
+    opacity: 0.95;
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(calc(var(--i) * 45deg)) translateY(-52px) scale(0.2);
+  }
+}
+
 .comparison-footnote {
   margin: 1rem 0 0;
   padding-top: 0.75rem;
@@ -759,6 +822,124 @@ a {
   font-size: 0.75rem;
   color: var(--text-dim);
   line-height: 1.4;
+}
+
+.capture-flash {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  pointer-events: none;
+  background: #fff;
+  mix-blend-mode: soft-light;
+}
+
+/* —— Loading skeleton shimmer —— */
+.results-skeleton {
+  display: grid;
+  gap: 1.15rem;
+  margin-top: 0.5rem;
+}
+
+.skeleton-header {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.skeleton-line {
+  border-radius: 0.5rem;
+  background: #1a1a1a;
+  height: 0.85rem;
+}
+
+.skeleton-kicker {
+  width: 6rem;
+  height: 0.65rem;
+}
+
+.skeleton-title {
+  width: min(22rem, 70%);
+  height: 1.6rem;
+}
+
+.skeleton-sub {
+  width: min(28rem, 85%);
+  height: 0.75rem;
+}
+
+.skeleton-tabs {
+  display: flex;
+  gap: 0.45rem;
+  overflow: hidden;
+}
+
+.skeleton-tab {
+  width: 5.5rem;
+  height: 2rem;
+  border-radius: 999px;
+  background: #1a1a1a;
+  flex-shrink: 0;
+}
+
+.skeleton-card {
+  padding: 1.25rem;
+  border-radius: 1.25rem;
+  border: 1px solid var(--line);
+  background: #0d0d0d;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.skeleton-chip {
+  width: 6.5rem;
+  height: 1.35rem;
+  border-radius: 999px;
+}
+
+.skeleton-lead {
+  width: 9rem;
+  margin-top: 0.35rem;
+}
+
+.skeleton-number {
+  width: 8rem;
+  height: 2.6rem;
+}
+
+.skeleton-unit {
+  width: 11rem;
+}
+
+.skeleton-icons {
+  display: flex;
+  gap: 0.35rem;
+  margin-top: 0.4rem;
+}
+
+.skeleton-icon {
+  width: 1.35rem;
+  height: 1.55rem;
+  border-radius: 0.3rem;
+  background: #1a1a1a;
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    #151515 0%,
+    #242424 40%,
+    #151515 80%
+  );
+  background-size: 200% 100%;
+  animation: shimmer-slide 1.25s ease-in-out infinite;
+}
+
+@keyframes shimmer-slide {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
 }
 
 /* —— Particle wave —— */
@@ -867,7 +1048,19 @@ a {
   .hero-badge,
   .brand,
   .hero-sub,
-  .hero-actions {
+  .hero-actions,
+  .shimmer,
+  .milestone-spark,
+  .comparison-number.is-pulse,
+  .capture-flash {
     animation: none !important;
+  }
+
+  .shimmer {
+    background: #1a1a1a;
+  }
+
+  .comparison-card.is-milestone {
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
   }
 }

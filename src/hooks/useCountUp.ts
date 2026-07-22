@@ -1,13 +1,23 @@
 import { animate, useMotionValue, useMotionValueEvent } from 'framer-motion'
 import { useEffect, useState } from 'react'
+import { countUpDuration, EASE_OUT_EXPO } from '../lib/motion'
+import { usePrefersReducedMotion } from './usePrefersReducedMotion'
 
-export function useCountUp(target: number, duration = 0.9): number {
+/** Ease-out count-up; snaps instantly when prefers-reduced-motion. */
+export function useCountUp(target: number): number {
+  const reduced = usePrefersReducedMotion()
   const motion = useMotionValue(0)
   const [display, setDisplay] = useState(0)
 
   useMotionValueEvent(motion, 'change', (v) => setDisplay(v))
 
   useEffect(() => {
+    if (reduced) {
+      motion.set(target)
+      setDisplay(target)
+      return
+    }
+
     const current = motion.get()
     if (
       current > 0 &&
@@ -17,12 +27,14 @@ export function useCountUp(target: number, duration = 0.9): number {
     ) {
       motion.set(0)
     }
+
     const controls = animate(motion, target, {
-      duration,
-      ease: [0.16, 1, 0.3, 1],
+      duration: countUpDuration(target, false),
+      // Ease-out: races up early, settles at the end (not linear slot-machine tick)
+      ease: EASE_OUT_EXPO,
     })
     return () => controls.stop()
-  }, [target, duration, motion])
+  }, [target, reduced, motion])
 
   return display
 }

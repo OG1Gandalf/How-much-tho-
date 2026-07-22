@@ -1,17 +1,25 @@
+import { motion } from 'framer-motion'
+import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion'
+import { iconFillItem } from '../lib/motion'
+
+export type IconKind =
+  | 'bottle'
+  | 'tree'
+  | 'pitch'
+  | 'school'
+  | 'hospital'
+  | 'surgery'
+  | 'syringe'
+  | 'firstaid'
+  | 'ambulance'
+  | 'biryani'
+
 interface IconGridProps {
   count: number
   accent: string
-  kind:
-    | 'bottle'
-    | 'tree'
-    | 'pitch'
-    | 'school'
-    | 'hospital'
-    | 'surgery'
-    | 'syringe'
-    | 'firstaid'
-    | 'ambulance'
-    | 'biryani'
+  kind: IconKind
+  /** Delay before icons start filling (syncs after card entrance). */
+  staggerOffset?: number
   maxIcons?: number
 }
 
@@ -124,29 +132,62 @@ const ICONS = {
   biryani: BiryaniIcon,
 }
 
-export function IconGrid({ count, accent, kind, maxIcons = 24 }: IconGridProps) {
+export function IconGrid({
+  count,
+  accent,
+  kind,
+  staggerOffset = 0,
+  maxIcons = 24,
+}: IconGridProps) {
+  const reduced = usePrefersReducedMotion()
   const Icon = ICONS[kind]
   const shown = Math.min(Math.max(0, Math.round(count)), maxIcons)
   const overflow = Math.max(0, Math.round(count) - maxIcons)
   const displayCount = count < 1 ? 1 : shown
+  const iconCount = Math.min(displayCount, maxIcons)
+
+  const delayChildren = reduced ? 0 : 0.12 + staggerOffset
+  const sequencedContainer = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: reduced ? 0 : 0.022,
+        delayChildren,
+      },
+    },
+  }
 
   return (
-    <div className="icon-grid" style={{ color: accent }}>
-      {Array.from({ length: Math.min(displayCount, maxIcons) }, (_, i) => (
-        <span
+    <motion.div
+      className="icon-grid"
+      style={{ color: accent }}
+      variants={sequencedContainer}
+      initial="hidden"
+      animate="visible"
+      key={`${kind}-${iconCount}-${Math.round(count)}`}
+    >
+      {Array.from({ length: iconCount }, (_, i) => (
+        <motion.span
           className="icon-grid-item"
           key={i}
-          style={{ animationDelay: `${i * 18}ms` }}
+          variants={iconFillItem(reduced)}
         >
           <Icon />
-        </span>
+        </motion.span>
       ))}
       {overflow > 0 && (
-        <span className="icon-grid-more">×{overflow.toLocaleString()} more</span>
+        <motion.span
+          className="icon-grid-more"
+          initial={reduced ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: reduced ? 0 : staggerOffset + 0.12 + iconCount * 0.022 }}
+        >
+          ×{overflow.toLocaleString()} more
+        </motion.span>
       )}
       {count > 0 && count < 1 && (
         <span className="icon-grid-more">a fraction of one</span>
       )}
-    </div>
+    </motion.div>
   )
 }

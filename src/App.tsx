@@ -8,6 +8,7 @@ import { useDebounce } from './hooks/useDebounce'
 import { useExchangeRates } from './hooks/useExchangeRates'
 import { InputForm } from './components/InputForm'
 import { ResultsView } from './components/ResultsView'
+import { ResultsSkeleton } from './components/ResultsSkeleton'
 import { ParticleWave } from './components/ParticleWave'
 import type { CategoryId, ReferenceDataset } from './types/reference'
 
@@ -134,7 +135,11 @@ export default function App() {
       </header>
 
       <main className="main" id="results">
-        {results.length > 0 && (
+        {loading && amount != null && amount > 0 && (
+          <ResultsSkeleton />
+        )}
+
+        {!loading && results.length > 0 && (
           <ResultsView
             amount={amount!}
             currency={currency}
